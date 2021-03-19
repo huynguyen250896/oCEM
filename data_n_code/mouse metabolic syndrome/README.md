@@ -8,8 +8,6 @@ The files here contain:
 
 2. process_data_overlappingCGM.R: R code examples to process the raw data from scratch before inputting them to overlappingCGM.
 
-3. processed_data_overlappingCGM.RData:  Processed data are available to run overlappingCGM immediately.
-
 Reference
 ---
 ```sh
