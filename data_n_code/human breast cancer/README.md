@@ -11,8 +11,6 @@ The files here contain:
 
 4. processed_DrGA.RData:  Processed data are available to run DrGA immediately.
 
-5. output_BRCA: Gained results from running DrGA.
-
 Reference
 ---
 ```sh
