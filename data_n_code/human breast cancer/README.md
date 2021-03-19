@@ -7,7 +7,7 @@ The files here contain:
 
 2. raw_data.zip: a subset of the raw data nescessary for running examples from the full one above.
 
-3. process_data_overlappingCGM.R: R code examples to process the raw data from scratch before inputting them to DrGA.
+3. process_data_overlappingCGM.R: R code examples to process the raw data from scratch before inputting them to overlappingCGM.
 
 4. processed_overlappingCGM.RData:  Processed data are available to run DrGA immediately.
 
