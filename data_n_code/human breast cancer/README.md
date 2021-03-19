@@ -9,7 +9,7 @@ The files here contain:
 
 3. process_data_overlappingCGM.R: R code examples to process the raw data from scratch before inputting them to overlappingCGM.
 
-4. processed_overlappingCGM.RData:  Processed data are available to run DrGA immediately.
+4. processed_overlappingCGM.RData:  Processed data are available to run overlappingCGM immediately.
 
 Reference
 ---
