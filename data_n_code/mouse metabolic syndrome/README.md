@@ -10,8 +10,6 @@ The files here contain:
 
 3. processed_data_DrGA.RData:  Processed data are available to run DrGA immediately.
 
-4. output_MS.zip:  Gained results from running DrGA.
-
 Reference
 ---
 ```sh
