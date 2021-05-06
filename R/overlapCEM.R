@@ -20,11 +20,11 @@
 #'
 #' @param ncomp positive integer. The optimal number of principal components. It should be >= 2.
 #'
-#' @param standardize logical. If your \code{data} are not standardized, just feed \code{T{} or \code{TRUE}
+#' @param standardize logical. If your \code{data} are not standardized, just feed \code{T} or \code{TRUE}
 #' to this paramerter. Default value is \code{T}.
 #'
 #' @param method Post-processing methods. Allowed values are "ICA-FDR", "ICA-Zscore",
-#' "IPCA-FDR".
+#' or "IPCA-FDR".
 #'
 #' @param cex.text numeric. Change the font size of texts in cells of the heatmap showing correlations between
 #' each identified module and each clinical features. Default value is 0.7.
