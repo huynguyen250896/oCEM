@@ -1,7 +1,13 @@
-#library
-library(WGCNA)
-library(overlappingCGM)
+# ----------------------o0o---------------------- #
+#                 Load library
+# ----------------------o0o---------------------- #
 
+#library
+devtools::install_github("huynguyen250896/oCEM", force = T) #NOTE: Download all dependencies of the tool!
+
+x=c("oCEM", "dplyr", "dynamicTreeCut", "flashClust","Hmisc", "WGCNA", "moments", "fastICA", "tidyr", "fdrtool", 
+    "mixOmics", "cluster", "purrr")
+lapply(x, require, character.only = TRUE)
 
 # ----------------------o0o---------------------- #
 #                 Pre-process data
@@ -54,12 +60,12 @@ wgcna = blockwiseModules(exp, power = 6,
 # ----------------------o0o---------------------- #
 #                  overlappingCGM
 # ----------------------o0o---------------------- #
-daBEST(data = exp)
+optimizeCOM(data = exp)
 # >> overlappingCGM suggests choosing the optimal number of components is: 9
 # >> overlappingCGM also suggests using ICA for your case. 
 
-cgm=overlappingCGM(data = exp, clinical = clinicalEXP, ncomp = 9,
-                        method = 'ICA-Zscore')
+cem=overlapCEM(data = exp, clinical = clinicalEXP, ncomp = 9,
+                        method = 'ICA-Zscore', cex.text = 1.0)
 
 # ----------------------o0o---------------------- #
 #                     iWGNCA
@@ -125,9 +131,9 @@ MEs = orderMEs(MEs0)
 # ----------------------o0o---------------------- #
 # comparison between WGCNA and overlappingCGM and between iWGCNA and overlappingCGM
 # WGCNA versus overlappingCGM
-cor(wgcna$MEs, cgm$patterns)
+cor(wgcna$MEs, cem$patterns)
 
 # iWGCNA versus overlappingCGM
-cor(MEs, cgm$patterns)
+cor(MEs, cem$patterns)
 
 
