@@ -1,0 +1,67 @@
+Package: oCEM
+Type: Package
+Title: oCEM: Automatic detection and analysis of overlapping co-expressed gene modules
+Version: 0.1.0
+Author@R:
+    c(person(given = "Quang-Huy",
+           family = "Nguyen",
+           role = c("aut", "cre"),
+           email = "huynguyen96.dnu@gmail.com"),
+      person("Duc-Hau","Le",role = "ths") 
+Maintainer: Quang-Huy Nguyen <huynguyen96.dnu@gmail.com>
+Description: oCEM possesses the decomposition methods with a 
+    wholly automatic analysis framework to help non-technical users 
+    to easily perform complicated statistical analyses and then detect 
+    overlapping co-expressed gene modules. For further information on 
+    requirements as well as how to implement this tool, please visit my 
+    Github repository: https://github.com/huynguyen250896/oCEM.
+License: MIT license
+Depends:
+    R (>= 3.5.0)
+Suggests:
+    knitr
+Encoding: UTF-8
+LazyData: true
+biocViews:
+Imports:
+    sp,
+    dplyr,
+    tidyr,
+    cluster,
+    mclust,
+    Biobase,
+    annotate,
+    GO.db,
+    mygene,
+    dynamicTreeCut,
+    flashClust,
+    Hmisc,
+    WGCNA,
+    purrr,
+    impute,
+    preprocessCore,
+    moments,
+    fastICA,
+    fdrtool,
+    mixOmics
+Remotes:
+    cran::dplyr,
+    cran::tidyr,
+    cran::cluster,
+    cran::mclust,
+    bioc::Biobase,
+    bioc::annotate,
+    bioc::GO.db,
+    bioc::mygene,
+    cran::dynamicTreeCut,
+    cran::flashClust,
+    cran::Hmisc,
+    cran::WGCNA,
+    cran::purrr,
+    bioc::impute,
+    bioc::preprocessCore,
+    cran::moments,
+    cran::fastICA,
+    cran::fdrtool,
+    bioc::mixOmics
+RoxygenNote: 7.1.1
