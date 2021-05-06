@@ -87,11 +87,11 @@ wgnca = blockwiseModules(exp, power = 6,
 # ----------------------o0o---------------------- #
 #                  overlappingCGM
 # ----------------------o0o---------------------- #
-daBEST(data = exp)
+optimizeCOM(data = exp)
 # >> overlappingCGM suggests choosing the optimal number of components is: 18 
 # >> Both ICA and IPCA-FDR are appropriate for your case. Please use another more stringent approach to make the best decision. 
 
-cgm=overlappingCGM(data = exp, clinical = cli, ncomp = 18,
+cem=overlapCEM(data = exp, clinical = cli, ncomp = 18,
                         method = 'ICA-Zscore')
 
 # ----------------------o0o---------------------- #
@@ -158,10 +158,10 @@ MEs = orderMEs(MEs0)
 # ----------------------o0o---------------------- #
 # comparison between WGCNA and overlappingCGM and between iWGCNA and overlappingCGM
 # WGCNA versus overlappingCGM
-cor(wgcna$MEs, cgm$patterns)
+cor(wgcna$MEs, cem$patterns)
 
 # iWGCNA versus overlappingCGM
-cor(MEs, cgm$patterns)
+cor(MEs, cem$patterns)
 
 
 
