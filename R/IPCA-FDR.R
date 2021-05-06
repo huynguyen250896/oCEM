@@ -17,7 +17,7 @@
 #'
 #' @param ncomp positive integer. The optimal number of principal components. It should be >= 2.
 #'
-#' @param standardize logical. If your \code{data} are not standardized, just feed \code{T{} or \code{TRUE}
+#' @param standardize logical. If your \code{data} are not standardized, just feed \code{T} or \code{TRUE}
 #' to this paramerter. Default value is \code{T}.
 #'
 #' @param cex.text numeric. Change the font size of texts in cells of the heatmap showing correlations between
