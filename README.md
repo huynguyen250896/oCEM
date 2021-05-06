@@ -12,7 +12,7 @@ The following are parameters included in overlapCEM and their role:
 
 - ncomp: positive integer. The optimal number of principal components. It should be >= 2.
 
-- standardize: logical. If your \code{data} are not standardized, just feed `T` or `TRUE` to this paramerter. Default value is `T`.
+- standardize: logical. If your `data` are not standardized, just feed `T` or `TRUE` to this paramerter. Default value is `T`.
 
 - method: Post-processing methods. Allowed values are `ICA-FDR`, `ICA-Zscore`, or `IPCA-FDR`.
 
