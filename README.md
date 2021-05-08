@@ -8,15 +8,15 @@ When it comes to the co-expressed gene module detection, its typical challenges 
 The following are parameters included in overlapCEM and their role:
 - data: a data frame or matrix. `data` has its rows are samples and its columns are genes.
 
-- clinical a data frame or matrix. Input data serve to perform Pearson's orrelations between each identified module and each clinical features. It includes its rows are samples, and its columns are clinical features of your choice.
+- clinical a data frame or matrix. Input data serve to perform Pearson's correlations between each identified module and each clinical feature. It includes its rows are samples, and its columns are clinical features of your choice.
 
 - ncomp: positive integer. The optimal number of principal components. It should be >= 2.
 
-- standardize: logical. If your `data` are not standardized, just feed `T` or `TRUE` to this paramerter. Default value is `T`.
+- standardize: logical. If your `data` are not standardized, just feed `T` or `TRUE` to this parameter. Default value is `T`.
 
 - method: Post-processing methods. Allowed values are `ICA-FDR`, `ICA-Zscore`, or `IPCA-FDR`.
 
-- cex.text: numeric. Change the font size of texts in cells of the heatmap showing correlations between each identified module and each clinical features. Default value is 0.7.
+- cex.text: numeric. Change the font size of texts in cells of the heatmap showing correlations between each identified module and each clinical feature. Default value is 0.7.
 
 Please download datasets [data_n_code](https://github.com/huynguyen250896/oCEM/tree/main/data_n_code) and read [Supplementary Materials](https://github.com/huynguyen250896/oCEM/blob/main/Supplementary%20Materials.pdf) (highly recommended) as examples to well grasp oCEM's easy-to-meet format and its usage.
 
