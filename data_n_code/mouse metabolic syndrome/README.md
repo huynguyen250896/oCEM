@@ -6,7 +6,7 @@ accession number GSE2814.
 The files here contain:
 1. FemaleLiver-Data.zip: the raw data necessary for running examples.
 
-2. process_data_overlappingCGM.R: R code examples to process the raw data from scratch before inputting them to overlappingCGM.
+2. process_data_overlappingCGM.R: R code examples to process the raw data from scratch before inputting them to oCEM.
 
 Reference
 ---
