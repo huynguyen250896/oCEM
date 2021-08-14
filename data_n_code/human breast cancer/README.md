@@ -7,7 +7,7 @@ The files here contain:
 
 2. raw_data.zip: a subset of raw data necessary for running examples, extracted from the full one above.
 
-3. process_data_overlappingCGM.R: R code examples to process the raw data from scratch before inputting them to oCEM.
+3. preprocess_data.R: R code examples to process the raw data from scratch before inputting them to oCEM.
 
 Reference
 ---
