@@ -54,7 +54,7 @@ wgcna = blockwiseModules(exp, power = 6,
                          verbose = 3)
 
 # ----------------------o0o---------------------- #
-#                  oCEM
+#                     oCEM
 # ----------------------o0o---------------------- #
 optimizeCOM(data = exp)
 # >> oCEM suggests choosing the optimal number of components is: 25 
