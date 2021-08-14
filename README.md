@@ -1,14 +1,14 @@
 # oCEM: Automatic detection and analysis of overlapping co-expressed gene modules
 #### I. Introduction
 ---
-When it comes to the co-expressed gene module detection, its typical challenges consist of overlap between identified modules and local co-expression in a subset of biological samples. Recent studies have reported that the decomposition methods are the most appropriate for solving these challenges. In this study, we represent an R tool, termed overlapping co-expressed gene module (oCEM), which possesses those methods with a wholly automatic analysis framework to help non-technical users to easily perform complicated statistical analyses and then gain robust results. We also develop a novel auxiliary statistical approach to select the optimal number of principal components using a permutation procedure. Two example datasets are used, related to human breast cancer and mouse metabolic syndrome, to enable the illustration of the straightforward use of the tool. Computational experiment results show that oCEM outperforms state-of-the-art techniques in the ability to additionally detect biologically relevant modules.
+When it comes to the co-expressed gene module detection, its typical challenges consist of overlap between identified modules and local co-expression in a subset of biological samples. Recent studies have reported that the decomposition methods are the most appropriate for solving these challenges. In this study, we represent an R tool, termed Overlapping CoExpressed gene Module (oCEM), which possesses those methods with a wholly automatic analysis framework to help non-technical users to easily perform complicated statistical analyses and then gain robust results. We also develop a novel auxiliary statistical approach to select the optimal number of principal components using a permutation procedure. Two example datasets are used, related to human breast cancer and mouse metabolic syndrome, to enable the illustration of the straightforward use of the tool. Computational experiment results show that oCEM outperforms state-of-the-art techniques in the ability to additionally detect biologically relevant modules.
 
 #### II. Understanding the tool and Data Structure
 ---
 The following are parameters included in overlapCEM and their role:
 - data: a data frame or matrix. `data` has its rows are samples and its columns are genes.
 
-- clinical a data frame or matrix. Input data serve to perform Pearson's correlations between each identified module and each clinical feature. It includes its rows are samples, and its columns are clinical features of your choice.
+- clinical: a data frame or matrix. Input data serve to perform Pearson's correlations between each identified module and each clinical feature. It includes its rows are samples, and its columns are clinical features of your choice.
 
 - ncomp: positive integer. The optimal number of principal components. It should be >= 2.
 
@@ -18,7 +18,7 @@ The following are parameters included in overlapCEM and their role:
 
 - cex.text: numeric. Change the font size of texts in cells of the heatmap showing correlations between each identified module and each clinical feature. Default value is 0.7.
 
-Please download datasets [data_n_code](https://github.com/huynguyen250896/oCEM/tree/main/data_n_code) and read [Supplementary Materials](https://github.com/huynguyen250896/oCEM/blob/main/Supplementary%20Materials.pdf) (highly recommended) as examples to well grasp oCEM's easy-to-meet format and its usage.
+Please download datasets [data_n_code](https://github.com/huynguyen250896/oCEM/tree/main/data_n_code) and read [Additional File 1](https://github.com/huynguyen250896/oCEM/blob/main/Additional%20File%201.pdf) (highly recommended) as examples to well grasp oCEM's easy-to-meet format and its usage.
 
 #### III. Pipeline
 ---
