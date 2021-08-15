@@ -3,7 +3,7 @@
 \docType{package}
 \name{overlapping CoExpressed gene Module}
 \alias{overlapCEM}
-\title{overlapCEM performs detection and analysis of overlapping co-expressed gene modules}
+\title{overlapCEM: Detection and correlation analysis of overlapping co-expressed gene modules}
 \usage{
 overlapCEM(data, clinical, ncomp,
        standardize = T, method, cex.text = 0.7)
