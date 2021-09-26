@@ -49,4 +49,17 @@ cem=overlapCEM(data = exp, clinical = clinicalEXP, ncomp = 9,
                         method = 'ICA-Zscore', cex.text = 1.0)
 ```
 
+#### V. Citation
+---
+Please kindly cite the following paper (and Star this Github repository if you find this tool of interest) if you use the tool in this repo: </br>
+```sh
+Reference Type: Journal Article
+Author: Nguyen, Quang-Huy
+Le, Duc-Hau
+Year: 2021
+Title: oCEM: Automatic detection and analysis of overlapping co-expressed gene modules
+Journal: bioRxiv
+Date: 2021/03/15
+DOI: 10.1101/2021.03.15.435373
+```
 Feel free to contact [Quang-Huy Nguyen](https://github.com/huynguyen250896) <huynguyen96.dnu AT gmail DOT com> for any questions about the code and results.
