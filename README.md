@@ -56,10 +56,10 @@ Please kindly cite the following paper (and Star this Github repository if you f
 Reference Type: Journal Article
 Author: Nguyen, Quang-Huy
 Le, Duc-Hau
-Year: 2021
+Year: 2022
 Title: oCEM: Automatic detection and analysis of overlapping co-expressed gene modules
-Journal: bioRxiv
-Date: 2021/03/15
-DOI: 10.1101/2021.03.15.435373
+Journal: BMC Genomics
+Date: 2022/01/08
+DOI: 10.1186/s12864-021-08072-5
 ```
 Feel free to contact [Quang-Huy Nguyen](https://github.com/huynguyen250896) <huynguyen96.dnu AT gmail DOT com> for any questions about the code and results.
