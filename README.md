@@ -1,7 +1,7 @@
 # oCEM: Automatic detection and analysis of overlapping co-expressed gene modules
 #### I. Introduction
 ---
-When it comes to the co-expressed gene module detection, its typical challenges consist of overlap between identified modules and local co-expression in a subset of biological samples. Recent studies have reported that the decomposition methods are the most appropriate for solving these challenges. In this study, we represent an R tool, termed Overlapping CoExpressed gene Module (oCEM), which possesses those methods with a wholly automatic analysis framework to help non-technical users to easily perform complicated statistical analyses and then gain robust results. We also develop a novel auxiliary statistical approach to select the optimal number of principal components using a permutation procedure. Three example datasets are used, related to human breast cancer, mouse metabolic syndrome, and E.coli gene expression compendium, to enable the illustration of the straightforward use of the tool. Computational experiment results show that oCEM outperforms state-of-the-art techniques in the ability to detect biologically relevant modules additionally .
+When it comes to the co-expressed gene module detection, its typical challenges consist of overlap between identified modules and local co-expression in a subset of biological samples. Recent studies have reported that the decomposition methods are the most appropriate for solving these challenges. In this study, we represent an R tool, termed Overlapping CoExpressed gene Module (oCEM), which possesses those methods with a wholly automatic analysis framework to help non-technical users to easily perform complicated statistical analyses and then gain robust results. We also develop a novel auxiliary statistical approach to select the optimal number of principal components using a permutation procedure. Three example datasets are used, related to human breast cancer, mouse metabolic syndrome, and E.coli gene expression compendium, to enable the illustration of the straightforward use of the tool. Computational experiment results show that oCEM outperforms state-of-the-art techniques in the ability to detect biologically relevant modules additionally.
 
 #### II. Understanding the tool and Data Structure
 ---
@@ -59,7 +59,11 @@ Le, Duc-Hau
 Year: 2022
 Title: oCEM: Automatic detection and analysis of overlapping co-expressed gene modules
 Journal: BMC Genomics
+Volume: 23
+Issue: 1
+Pages: 39
 Date: 2022/01/08
+ISSN: 1471-2164
 DOI: 10.1186/s12864-021-08072-5
 ```
 Feel free to contact [Quang-Huy Nguyen](https://github.com/huynguyen250896) <huynguyen96.dnu AT gmail DOT com> for any questions about the code and results.
