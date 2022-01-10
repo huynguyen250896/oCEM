@@ -24,6 +24,13 @@ optimizeCOM(data = exp)
 # >> oCEM suggests choosing the optimal number of components is: 9
 # >> oCEM also suggests using ICA for your case. 
 }
+
+\references{
+Quang-Huy Nguyen, Duc-Hau Le. (2022). 
+oCEM: Automatic detection and analysis of overlapping co-expressed gene modules.
+BMC Genomics, 23(1):39.
+}
+
 \author{
 Quang-Huy Nguyen
 }
