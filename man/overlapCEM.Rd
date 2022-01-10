@@ -32,9 +32,14 @@ optimizeCOM(data = exp)
 
 cem=overlapCEM(data = exp, clinical = clinicalEXP, ncomp = 9,
                         method = 'ICA-Zscore', cex.text = 1.0)
-
-
 }
+
+\references{
+Quang-Huy Nguyen, Duc-Hau Le. (2022). 
+oCEM: Automatic detection and analysis of overlapping co-expressed gene modules.
+BMC Genomics, 23(1):39.
+}  
+
 \author{
 Quang-Huy Nguyen
 }
