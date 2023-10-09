@@ -6,7 +6,7 @@ Author@R:
     c(person(given = "Quang-Huy",
            family = "Nguyen",
            role = c("aut", "cre"),
-           email = "huynguyen96.dnu@gmail.com"),
+           email = "huynguyen96.dnu@gmail.com")),
       person("Duc-Hau","Le",role = "ths") 
 Maintainer: Quang-Huy Nguyen <huynguyen96.dnu@gmail.com>
 Description: oCEM possesses the decomposition methods with a 

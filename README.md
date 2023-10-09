@@ -10,7 +10,7 @@ The following are parameters included in overlapCEM and their role:
 
 - clinical: a data frame or matrix. Input data serve to perform Pearson's correlations between each identified module and each clinical feature. It includes its rows are samples, and its columns are clinical features of your choice.
 
-- ncomp: positive integer. The optimal number of principal components. It should be >= 2.
+- ncomp: positive integer. The optimal number of principal components. It should be >= 1.
 
 - standardize: logical. If your `data` are not standardized, just feed `T` or `TRUE` to this parameter. Default value is `T`.
 
@@ -35,21 +35,25 @@ Call the nescessary libraries;
 ```sh
 x = c("oCEM", "dplyr", "dynamicTreeCut", "flashClust","Hmisc",
   "WGCNA", "moments", "fastICA", "tidyr", "fdrtool", "mixOmics",
-  "cluster", "purrr")
+  "cluster", "purrr", "parallel")
 lapply(x, require, character.only = TRUE)
 ```
 running example:
 ```sh
 # oCEM
-optimizeCOM(data = exp)
+num_pc <- optimizeCOM(data = exp, cores = 5)
 # >> oCEM suggests choosing the optimal number of components is: 9
 # >> oCEM also suggests using ICA for your case. 
 
-cem=overlapCEM(data = exp, clinical = clinicalEXP, ncomp = 9,
+cem <-overlapCEM(data = exp, clinical = clinicalEXP, ncomp = num_pc,
                         method = 'ICA-Zscore', cex.text = 1.0)
 ```
 
-#### V. Citation
+#### V. What's new
+---
+- 2023-10-08: Users now can set the number of cores for the `optimizeCOM` algorithm on their own, meaning that they can parallely perform the algorithm and get the optimal number of PCs more rapidly.
+
+#### VI. Citation
 ---
 Please kindly cite the following paper (and Star this Github repository if you find this tool of interest) if you use the tool in this repo: </br>
 ```sh

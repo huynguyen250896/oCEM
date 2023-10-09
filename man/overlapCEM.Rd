@@ -2,10 +2,10 @@
 % Please edit documentation in R/DrGA.R
 \docType{package}
 \name{overlapping CoExpressed gene Module}
-\alias{overlapCEM}
-\title{overlapCEM: Detection and correlation analysis of overlapping co-expressed gene modules}
+\alias{oCEM}
+\title{oCEM: Detection and correlation analysis of overlapping co-expressed gene modules}
 \usage{
-overlapCEM(data, clinical, ncomp,
+cem=overlapCEM(data, clinical, ncomp,
        standardize = T, method, cex.text = 0.7)
 }
 \arguments{
@@ -26,11 +26,11 @@ Identifies overlapping co-expressed gene modules.
 }
 \examples{
 # Determine the optimal number of components
-optimizeCOM(data = exp)
+ncomp <- optimizeCOM(data = exp, cores = 5)
 # >> oCEM suggests choosing the optimal number of components is: 9
 # >> oCEM also suggests using ICA for your case. 
 
-cem=overlapCEM(data = exp, clinical = clinicalEXP, ncomp = 9,
+cem <- overlapCEM(data = exp, clinical = clinicalEXP, ncomp = ncomp,
                         method = 'ICA-Zscore', cex.text = 1.0)
 }
 

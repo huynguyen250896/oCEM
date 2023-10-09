@@ -6,19 +6,18 @@
 devtools::install_github("huynguyen250896/oCEM", force = T) #NOTE: Download all dependencies of the tool!
 
 x=c("oCEM", "dplyr", "dynamicTreeCut", "flashClust","Hmisc", "WGCNA", "moments", "fastICA", "tidyr", "fdrtool", 
-    "mixOmics", "cluster", "purrr")
+    "mixOmics", "cluster", "purrr", "parallel")
 lapply(x, require, character.only = TRUE)
 
 # ----------------------o0o---------------------- #
 #                 Pre-process data
 # ----------------------o0o---------------------- #
 #load raw data
-exp = read.table('ecoli_data.tsv', sep = '\t', check.names = FALSE, header = TRUE, row.names = NULL)
+exp = read.table('ecoli_data.tsv', sep = '\t', check.names = FALSE, header = TRUE, row.names = NULL) %>% t()
 gene = read.table('ecoli_gene_names.tsv', sep = '\t', check.names = FALSE, header = TRUE, row.names = NULL, col.names = NULL)
 
 #assign gene names to gene expression data
-rownames(exp) = gene$row.names
-exp = t(exp) #ensuring rows are samples and its columns are genes.
+colnames(exp) = gene$row.names
 
 #detect outliers
 sampleTree = hclust(dist(exp), method = "average")
@@ -41,8 +40,8 @@ exp1 = apply(exp, 2, function(x) sd(x)) %>%
 exp1 = exp1 %>% dplyr::filter(. > 1)
 
 exp = exp[, colnames(exp) %in% rownames(exp1)]
-#check dimension
-dim(exp) # 801 572
+#ensuring rows are samples and its columns are genes.
+dim(exp) # 801 samples 572 genes. 
 
 # ----------------------o0o---------------------- #
 #                      WGCNA
@@ -56,11 +55,11 @@ wgcna = blockwiseModules(exp, power = 6,
 # ----------------------o0o---------------------- #
 #                     oCEM
 # ----------------------o0o---------------------- #
-optimizeCOM(data = exp)
+num_cor <- optimizeCOM(data = exp, cores = 5)
 # >> oCEM suggests choosing the optimal number of components is: 25 
 # >> Both ICA and IPCA-FDR are appropriate for your case. Please use a more stringent approach to make the best decision. 
 
-cem=overlapCEM(data = exp, clinical = clinicalEXP, ncomp = 25,
+cem <- overlapCEM(data = exp, clinical = clinicalEXP, ncomp = num_PC,
                method = 'ICA-Zscore', cex.text = 1.0)
 #We tried running oCEM with ICA-Zscore with a stricter threshold, Z-score = 1.5
 
