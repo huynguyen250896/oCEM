@@ -1,7 +1,7 @@
 Package: oCEM
 Type: Package
 Title: oCEM: Automatic detection and analysis of overlapping co-expressed gene modules
-Version: 0.2.0
+Version: 0.1.2
 Author@R:
     c(person(given = "Quang-Huy",
            family = "Nguyen",
