@@ -1,6 +1,13 @@
+# ----------------------o0o---------------------- #
+#                 Load library
+# ----------------------o0o---------------------- #
+
 #library
-library(WGCNA)
-library(overlappingCGM)
+devtools::install_github("huynguyen250896/oCEM", force = T) #NOTE: Download all dependencies of the tool!
+
+x=c("oCEM", "dplyr", "dynamicTreeCut", "flashClust","Hmisc", "WGCNA", "moments", "fastICA", "tidyr", "fdrtool", 
+    "mixOmics", "cluster", "purrr", "parallel")
+lapply(x, require, character.only = TRUE)
 
 # ----------------------o0o---------------------- #
 #                 Pre-process data
@@ -85,13 +92,13 @@ wgnca = blockwiseModules(exp, power = 6,
                        verbose = 3)
 
 # ----------------------o0o---------------------- #
-#                  overlappingCGM
+#                      oCEM
 # ----------------------o0o---------------------- #
-optimizeCOM(data = exp)
+num_cor <- optimizeCOM(data = exp, cores = 5)
 # >> overlappingCGM suggests choosing the optimal number of components is: 18 
 # >> Both ICA and IPCA-FDR are appropriate for your case. Please use another more stringent approach to make the best decision. 
 
-cem=overlapCEM(data = exp, clinical = cli, ncomp = 18,
+cem=overlapCEM(data = exp, clinical = cli, ncomp = num_cor,
                         method = 'ICA-Zscore')
 
 # ----------------------o0o---------------------- #

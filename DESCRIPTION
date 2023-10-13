@@ -1,12 +1,12 @@
 Package: oCEM
 Type: Package
 Title: oCEM: Automatic detection and analysis of overlapping co-expressed gene modules
-Version: 0.1.0
+Version: 0.2.0
 Author@R:
     c(person(given = "Quang-Huy",
            family = "Nguyen",
            role = c("aut", "cre"),
-           email = "huynguyen96.dnu@gmail.com"),
+           email = "huynguyen96.dnu@gmail.com")),
       person("Duc-Hau","Le",role = "ths") 
 Maintainer: Quang-Huy Nguyen <huynguyen96.dnu@gmail.com>
 Description: oCEM possesses the decomposition methods with a 

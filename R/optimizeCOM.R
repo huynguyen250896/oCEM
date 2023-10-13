@@ -72,6 +72,8 @@ pcaCharts <- function(x,y) {
 #' @param standardize logical. If your \code{data} are not standardized, just feed \code{T{} or \code{TRUE}
 #' to this paramerter. Default value is \code{T}.
 #'
+#' @param cores positive integer. The number of cores used to parallely perform the function. Default value is 1. 
+#'
 #' @param verbose Default value is \code{TRUE}. A logical specifying whether to print details of analysis processes.
 #'
 #' @return NULL
@@ -80,14 +82,13 @@ pcaCharts <- function(x,y) {
 #'
 #' @export
 
-optimizeCOM=function(data = NULL, P=1000, standardize = T, verbose = T){
-
+optimizeCOM=function(data = NULL, P=1000, standardize = T, cores = 1, verbose = T){
   #Errors
   if(missing(data)){
     stop("Error: gene expression data are missing. \n")
   }
 
-  #Main function
+  #system time
   now = Sys.time()
 
   # defined log function
@@ -99,71 +100,66 @@ optimizeCOM=function(data = NULL, P=1000, standardize = T, verbose = T){
   # Determine the optimal number of indepedent components
   #singular value decomposition
   if(standardize == T | standardize == TRUE){
-    svd=svd(scale(data))
+      svd=svd(scale(data))
   } else{
-    svd=svd(data)
+      svd=svd(data)
   }
-
-  #generate random matrices gained by independently permuting rows/genes within columns/samples
-  ranMat = list()
-  ranMat = replicate(P, apply(as.matrix(t(data)), 2, sample), simplify = F)
-
-  cc = list()
-  for ( i in 1:P ){
-    if(standardize == T | TRUE){
-      cc[[i]] <- svd(scale(t(ranMat[[i]])))$d
-    } else{
-      cc[[i]] <- svd(t(ranMat[[i]]))$d
-    }
-  }
-
-  #%explained variance and cumulative %explained variance of real data
+  
+  #%explained variance and cumulative %explained variance of the original data
   x.var = svd$d^2/sum(svd$d^2) * 100
   x.pvar <- cumsum(x.var)
 
-  x.var1 = list()
-  for ( j in 1:P ){
-    #%explained variance of a random matrix
-    x.var1[[j]] <- cc[[j]]^2/sum(cc[[j]]^2) * 100
-  }
-  df_per<-do.call(rbind, x.var1) %>% t()
-  average = rowMeans(df_per)
+  #P random matrices
+  ranMat = parallel::mclapply(1:P, mc.cores = cores, FUN = function(p){
+      #generate P random matrices gained by independently permuting samples
+      permutated_matrix <- apply(data, 1, sample) %>% t()
+
+      cc = list()
+      if(standardize == T | TRUE){
+          cc[[p]] <- svd(scale(permutated_matrix))$d
+      } else {
+          cc[[p]] <- svd(permutated_matrix)$d
+      }
+
+      #%explained variance of a random matrix
+      x.var1 = list()
+      x.var1[[p]] <- cc[[p]]^2/sum(cc[[p]]^2) * 100
+  }) %>% do.call(what=rbind) %>% t()
+
+  average = rowMeans(ranMat)
   #find point on intersection of blue and purple curves
   # Find points where x1 is above x2.
-  # Points always intersect when above=TRUE, then FALSE or reverse
+  # Points always intersect when above=TRUE
   intersect.points = which(diff(x.var > average) != 0)
 
   # Find the slopes for the line segment.
   x1.slopes <- x.var[intersect.points+1] - x.var[intersect.points]
-  x2.slopes <- df_per[intersect.points+1] - df_per[intersect.points]
+  x2.slopes <- ranMat[intersect.points+1] - ranMat[intersect.points]
 
   # Find the intersection for the segment.
-  optimal <- intersect.points + ((df_per[intersect.points] - x.var[intersect.points]) / (x1.slopes-x2.slopes))
-  optimal1 <- min(ceiling(intersect.points + ((df_per[intersect.points] - x.var[intersect.points]) / (x1.slopes-x2.slopes)))) #the optimal number of components
+  optimal <- intersect.points + ((ranMat[intersect.points] - x.var[intersect.points]) / (x1.slopes-x2.slopes))
+  optimal1 <- abs(min(ceiling(intersect.points + ((ranMat[intersect.points] - x.var[intersect.points]) / (x1.slopes-x2.slopes))))) #the optimal number of components
+
+  #Scree plot
+  if(verbose == T | verbose == TRUE){
+      pcaCharts(svd, average)
+  }
 
   # Run ICA
   if(standardize == T | standardize == TRUE){
-    x  = scale(data)
-  } else{
-    x = data
+      data = scale(data)
   }
 
-  ICA = fastICA(t(x), n.comp = optimal1, fun = "logcosh", alpha = 1,
-                method = "C", row.norm = FALSE, maxit = 1000,
-                tol = 0.0001)
+  ICA = fastICA(t(data), n.comp = optimal1, fun = "logcosh", alpha = 1,
+                  method = "C", row.norm = FALSE, maxit = 1000,
+                  tol = 0.0001)
   rownames(ICA$S) = colnames(data)
 
   # Remove signatures whose kurtosis <= 3
   kurt_ICA=ICA$S #define signatures of genes
 
-  # Run IPCA
-  if(standardize == T | standardize == TRUE){
-    x1  = scale(data)
-  } else{
-    x1  = data
-  }
-  IPCA = mixOmics::ipca(x1, ncomp = optimal1, fun = "logcosh", mode="deflation")
-
+  # Run IPCA  
+  IPCA = mixOmics::ipca(data, ncomp = optimal1, fun = "logcosh", mode="deflation")
 
   # Remove component whose kurtosis <= 3
   kurt_IPCA=IPCA[["loadings"]][["X"]] #define signatures of genes
@@ -171,47 +167,38 @@ optimizeCOM=function(data = NULL, P=1000, standardize = T, verbose = T){
   #extract kurtosis
   cc2=list(My_names_is = paste("Huy", 1:ncol(kurt_ICA)), ICA = NA, IPCA = NA)
   for (i in 1:ncol(kurt_IPCA)){
-    cc2$ICA[i] = kurtosis(kurt_ICA[,i])
-    cc2$IPCA[i] = kurtosis(kurt_IPCA[,i])
+      cc2$ICA[i] = kurtosis(kurt_ICA[,i])
+      cc2$IPCA[i] = kurtosis(kurt_IPCA[,i])
   }
 
   #messenger
   #TH1
   if( (all(cc2$ICA < 3) == TRUE) & (any(cc2$IPCA > 3) == TRUE) ){
-    cat(">> oCEM suggests choosing the optimal number of components is:", optimal1, "\n")
-    cat(">> oCEM also suggests using IPCA-FDR for your case", "\n")
+      cat(">> oCEM suggests choosing the optimal number of components is:", optimal1, "\n")
+      cat(">> oCEM also suggests using IPCA-FDR for your case", "\n")
   }
 
   #TH2
   if( (all(cc2$ICA < 3) == TRUE) & (all(cc2$IPCA < 3) == TRUE) ){
-    cat(">> oCEM suggests choosing the optimal number of components is:", optimal1, "\n")
-    cat(">> oCEM cannot suggest which method should be selected. Please use a more stringent approach to make the best decision for your case.", "\n")
+      cat(">> oCEM suggests choosing the optimal number of components is:", optimal1, "\n")
+      cat(">> oCEM cannot suggest which method should be selected. Please use a more stringent approach to make the best decision for your case.", "\n")
   }
 
   #TH3
   if( (any(cc2$ICA > 3) == TRUE) & (all(cc2$IPCA < 3) == TRUE) ){
-    cat(">> oCEM suggests choosing the optimal number of components is:", optimal1, "\n")
-    cat(">> oCEM also suggests using ICA for your case.", "\n")
+      cat(">> oCEM suggests choosing the optimal number of components is:", optimal1, "\n")
+      cat(">> oCEM also suggests using ICA for your case.", "\n")
   }
 
   #TH4
   if( (any(cc2$ICA > 3) == TRUE) & (any(cc2$IPCA > 3) == TRUE) ){
-    cat(">> oCEM suggests choosing the optimal number of components is:", optimal1, "\n")
-    cat(">> Both ICA and IPCA-FDR are appropriate for your case. Please use a more stringent approach to make the best decision.", "\n")
+      cat(">> oCEM suggests choosing the optimal number of components is:", optimal1, "\n")
+      cat(">> Both ICA and IPCA-FDR are appropriate for your case. Please use a more stringent approach to make the best decision.", "\n")
   }
-
-  #Scree plot
-  pcaCharts(svd, average)
 
   #time difference
   timediff = Sys.time() - now;
   mlog("Done in ", timediff, " ", units(timediff), ".\n")
 
+  return(optimal1)
 }
-
-
-
-
-
-
-

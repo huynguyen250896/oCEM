@@ -10,13 +10,15 @@ The following are parameters included in overlapCEM and their role:
 
 - clinical: a data frame or matrix. Input data serve to perform Pearson's correlations between each identified module and each clinical feature. It includes its rows are samples, and its columns are clinical features of your choice.
 
-- ncomp: positive integer. The optimal number of principal components. It should be >= 2.
+- ncomp: positive integer. The optimal number of principal components. It should be >= 1.
 
 - standardize: logical. If your `data` are not standardized, just feed `T` or `TRUE` to this parameter. Default value is `T`.
 
-- method: Post-processing methods. Allowed values are `ICA-FDR`, `ICA-Zscore`, or `IPCA-FDR`.
+- method: string. Post-processing methods. Allowed values are `ICA-FDR`, `ICA-Zscore`, or `IPCA-FDR`. Default value is `ICA-Zscore`.
 
 - cex.text: numeric. Change the font size of texts in cells of the heatmap showing correlations between each identified module and each clinical feature. Default value is 0.7.
+
+- verbose: logical. Show the running time to complete running the whole pipeline. Default value is T.
 
 Please download datasets [data_n_code](https://github.com/huynguyen250896/oCEM/tree/main/data_n_code) and read [Additional File 1](https://github.com/huynguyen250896/oCEM/blob/main/Additional%20File%201.pdf) (highly recommended) as examples to well grasp oCEM's easy-to-meet format and its usage.
 
@@ -35,21 +37,25 @@ Call the nescessary libraries;
 ```sh
 x = c("oCEM", "dplyr", "dynamicTreeCut", "flashClust","Hmisc",
   "WGCNA", "moments", "fastICA", "tidyr", "fdrtool", "mixOmics",
-  "cluster", "purrr")
+  "cluster", "purrr", "parallel")
 lapply(x, require, character.only = TRUE)
 ```
 running example:
 ```sh
 # oCEM
-optimizeCOM(data = exp)
+num_pc <- optimizeCOM(data = exp, cores = 5)
 # >> oCEM suggests choosing the optimal number of components is: 9
 # >> oCEM also suggests using ICA for your case. 
 
-cem=overlapCEM(data = exp, clinical = clinicalEXP, ncomp = 9,
-                        method = 'ICA-Zscore', cex.text = 1.0)
+cem <-overlapCEM(data = exp, clinical = clinicalEXP, ncomp = num_pc)
 ```
 
-#### V. Citation
+#### V. What's new
+---
+- 2023-10-13: I made a bad decision that required the users to input both the mRNA and clinical data into `overlapCEM` to be able to run the tool successfully. Now, I fixed it, meaning that the mRNA data is the only data they need to feed into the tool. Besides, I refactored the codes comprehensively that would make them readable more (and hope that it runs faster also!).
+- 2023-10-08: Users now can set the number of cores for the `optimizeCOM` algorithm on their own using its new argument `cores`, meaning that they can parallely perform the algorithm and get the optimal number of PCs more rapidly . Unfortunately, this feature is not available to Window users this time!
+
+#### VI. Citation
 ---
 Please kindly cite the following paper (and Star this Github repository if you find this tool of interest) if you use the tool in this repo: </br>
 ```sh

@@ -24,7 +24,7 @@
 #' to this paramerter. Default value is \code{T}.
 #'
 #' @param method Post-processing methods. Allowed values are "ICA-FDR", "ICA-Zscore",
-#' or "IPCA-FDR".
+#' or "IPCA-FDR". Default value is "ICA-Zscore".
 #'
 #' @param cex.text numeric. Change the font size of texts in cells of the heatmap showing correlations between
 #' each identified module and each clinical features. Default value is 0.7.
@@ -36,24 +36,16 @@
 #'
 #' @export
 
-overlapCEM = function(data = NULL, clinical = NULL, ncomp = NULL, standardize = T,
-                      method = c("ICA-FDR", "ICA-Zscore", "IPCA-FDR"), cex.text = 0.7){
+overlapCEM = function(data = NULL, clinical=NULL, ncomp = NULL, standardize = T,
+                      method = "ICA-Zscore", cex.text = 0.7){
 
   #Errors
   if(missing(data)){
     stop("Error: gene expression data are missing. \n")
   }
 
-  if(missing(clinical)){
-    stop("Error: clinical data are missing. \n")
-  }
-
   if(missing(ncomp)){
     stop("Error: You do not define the optimal number of principal components. \n")
-  }
-
-  if(missing(method)){
-    stop("Error: Which post-processing method you want to choose? \n")
   }
 
   #main function
@@ -72,6 +64,3 @@ overlapCEM = function(data = NULL, clinical = NULL, ncomp = NULL, standardize = 
                    ncomp = ncomp, cex.text = cex.text))
   }
 }
-
-
-

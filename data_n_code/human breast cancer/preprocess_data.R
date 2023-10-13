@@ -6,7 +6,7 @@
 devtools::install_github("huynguyen250896/oCEM", force = T) #NOTE: Download all dependencies of the tool!
 
 x=c("oCEM", "dplyr", "dynamicTreeCut", "flashClust","Hmisc", "WGCNA", "moments", "fastICA", "tidyr", "fdrtool", 
-    "mixOmics", "cluster", "purrr")
+    "mixOmics", "cluster", "purrr", "parallel")
 lapply(x, require, character.only = TRUE)
 
 # ----------------------o0o---------------------- #
@@ -58,14 +58,13 @@ wgcna = blockwiseModules(exp, power = 6,
                        verbose = 3)
 
 # ----------------------o0o---------------------- #
-#                  overlappingCGM
+#                  oCEM
 # ----------------------o0o---------------------- #
-optimizeCOM(data = exp)
-# >> overlappingCGM suggests choosing the optimal number of components is: 9
-# >> overlappingCGM also suggests using ICA for your case. 
+num_cor <- optimizeCOM(data = exp, cores = 5)
+# >> oCEM suggests choosing the optimal number of components is: 9
+# >> oCEM also suggests using ICA for your case.
 
-cem=overlapCEM(data = exp, clinical = clinicalEXP, ncomp = 9,
-                        method = 'ICA-Zscore', cex.text = 1.0)
+cem <- overlapCEM(data = exp, clinical = clinicalEXP, ncomp = num_cor, cex.text = 1.0)
 
 # ----------------------o0o---------------------- #
 #                     iWGNCA
