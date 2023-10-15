@@ -52,7 +52,7 @@ cem <-overlapCEM(data = exp, clinical = clinicalEXP, ncomp = num_pc)
 
 #### V. What's new
 ---
-- 2023-10-13: I made a bad decision that required the users to input both the mRNA and clinical data into `overlapCEM` to be able to run the tool successfully. Now, I fixed it, meaning that the mRNA data is the only data they need to feed into the tool. Besides, I refactored the codes comprehensively that would make them readable more (and hope that it runs faster also!).
+- 2023-10-13: I made a bad decision that required the users to input both the mRNA and clinical data into `overlapCEM` to be able to run the tool successfully. Now, I made the input clinical data optional, meaning that the mRNA data is the only data for the tool to run. Besides, I refactored the codes comprehensively that would make them readable more (and hope that it runs more rapidly also!).
 - 2023-10-08: Users now can set the number of cores for the `optimizeCOM` algorithm on their own using its new argument `cores`, meaning that they can parallely perform the algorithm and get the optimal number of PCs more rapidly . Unfortunately, this feature is not available to Window users this time!
 
 #### VI. Citation
