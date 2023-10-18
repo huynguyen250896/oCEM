@@ -53,7 +53,7 @@ cem <-overlapCEM(data = exp, clinical = clinicalEXP, ncomp = num_pc)
 #### V. What's new
 ---
 - 2023-10-13: I made a bad decision that required the users to input both the mRNA and clinical data into `overlapCEM` to be able to run the tool successfully. Now, I made the input clinical data optional, meaning that the mRNA data is the only data for the tool to run. Besides, I refactored the codes comprehensively that would make them readable more (and hope that it runs more rapidly also!). Besides, default value to `optimizeCOM`'s `method` parameter set to `ICA-Zscore` makes both life scientists and bioinformatics scientists not confused about what to select and serves to compare the performance of oCEM with that of other tools. This decision was based on the results of a wonderful paper [[1](https://www.nature.com/articles/s41467-018-03424-4)].
-- 2023-10-08: Users now can set the number of cores for the `optimizeCOM` algorithm on their own using its new argument `cores`, meaning that they can parallely perform the algorithm and get the optimal number of PCs more rapidly . Unfortunately, this feature is not available to Window users this time!
+- 2023-10-08: Users now can set the number of cores to the `optimizeCOM` algorithm on their own using its new argument `cores`, meaning that they can parallely perform the algorithm and get the optimal number of PCs more rapidly . Unfortunately, this feature is not available to Window users this time!
 
 #### VI. Citation
 ---
