@@ -62,4 +62,4 @@ Remotes:
     cran::fastICA,
     cran::fdrtool,
     bioc::mixOmics
-RoxygenNote: 7.1.1
+RoxygenNote: 7.3.3

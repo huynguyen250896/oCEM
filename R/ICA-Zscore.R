@@ -42,12 +42,12 @@ ICAzscore=function(data = NULL, clinical=NULL, ncomp = NULL, standardize = T,
   
   # Run ICA
   set.seed(25896)
-  if(standardize == T | standardize == TRUE){
+  if(isTRUE(standardize)){
     data  = scale(data)
   } 
 
   ICA = fastICA(t(data), n.comp = ncomp, fun = "logcosh", alpha = 1,
-                method = "C", row.norm = FALSE, maxit = 1000,
+                method = "C", row.norm = FALSE, maxit = 200,
                 tol = 0.0001)
   rownames(ICA$S) = colnames(data)
 

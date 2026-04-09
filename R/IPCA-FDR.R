@@ -42,7 +42,7 @@ IPCAfdr=function(data = NULL, clinical = NULL, ncomp = NULL, standardize = T,
 
   # Run IPCA
   set.seed(25896)
-  if(standardize == T | standardize == TRUE){
+  if(isTRUE(standardize)){
     data  = scale(data)
   } 
 

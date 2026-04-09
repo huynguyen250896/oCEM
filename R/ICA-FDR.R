@@ -42,7 +42,7 @@ ICAfdr=function(data = NULL, clinical=NULL, ncomp = NULL, standardize = T,
   
   # Run ICA
   set.seed(25896)
-  if(standardize == T | standardize == TRUE){
+  if(isTRUE(standardize)){
     data  = scale(data)
   }
 
